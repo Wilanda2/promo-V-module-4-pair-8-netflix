@@ -18,7 +18,8 @@
 --
 -- Table structure for table `actors`
 --
-
+CREATE DATABASE Netflix;
+USE Netflix;
 DROP TABLE IF EXISTS `actors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -108,3 +109,23 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-02-14 11:20:30
+
+-- 4.2 CRUD MySQL
+
+SELECT * FROM movies;
+SELECT titleMovie, genreMovie from movies WHERE yearMovie >1995;
+SELECT categoryMovie FROM movies WHERE categoryMovie = 'Top 10';
+SELECT titleMovie FROM movies WHERE categoryMovie = 'Top 10';
+SELECT * FROM movies;
+UPDATE movies SET yearMovie = '1997' WHERE idMovie =2;
+
+SELECT * FROM actors;
+SELECT nameActor, lastnameActor, birthday FROM actors WHERE  birthday BETWEEN "1950-01-01" and "1956-01-01"; 
+SELECT nameActor, lastnameActor FROM actors WHERE countryActor = 'Estados Unidos';
+
+SELECT * FROM users;
+DELETE FROM users WHERE nameUser LIKE 'm%' ;
+
+ALTER TABLE ACTORS ADD imagen VARCHAR(300);
+INSERT INTO actors (imagen) VALUES ('enlace de la imagen');
+SELECT * FROM actors;
