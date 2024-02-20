@@ -45,7 +45,7 @@ const App = () => {
 
   /*
   useEffect: obtener el perfil de la usuaria.
-  Se ejecuta cuando userId cambian de valor, es decir, cuando pasa de un string vacío a un strin relleno con el id de la usuaria.
+  Se ejecuta cuando userId cambian de valor, es decir, cuando pasa de un string vacío a un string relleno con el id de la usuaria.
   Como queremos que el back devuelva los datos de una usuaria getProfileFromApi recibe el userId.
   */
   useEffect(() => {
@@ -74,7 +74,7 @@ const App = () => {
   /*
   Event: enviar datos del login al API.
   Con este evento enviamos los datos del login al servidor cuando la usuaria lanza el evento.
-  Como queremos que el back devuelva el id de la usuaria sendLoginToApi recibe el email y la contraseña que ella haya escrito.
+  Como queremos que el back devuelva el id de la usuaria, sendLoginToApi recibe el email y la contraseña que ella haya escrito.
   */
   const sendLoginToApi = loginData => {
     // Limpiamos el error antes de enviar los datos al API
@@ -95,7 +95,7 @@ const App = () => {
   /*
   Event: enviar datos del sign up (o registro) al API.
   Con este evento enviamos los datos del sign up al servidor cuando la usuaria lanza el evento.
-  Como queremos que el back devuelva el id de la usuaria sendSingUpToApi recibe el email y la contraseña que ella haya escrito.
+  Como queremos que el back devuelva el id de la usuaria, sendSingUpToApi recibe el email y la contraseña que ella haya escrito.
   */
   const sendSingUpToApi = data => {
     // Limpiamos el error antes de enviar los datos al API
