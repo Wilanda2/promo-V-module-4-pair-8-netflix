@@ -33,7 +33,7 @@ const AllMovies = (props) => {
 
         <div className="movies__filters--sort">
           <label>
-            Ordernar: A-Z
+            Ordenar: A-Z
             <input
               className="movies__radio"
               type="radio"

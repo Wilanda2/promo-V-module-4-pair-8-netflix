@@ -53,3 +53,15 @@ server.get('/movies', async (req, res) => {
     movies: results
   });
 });
+
+// servidor de estaticos
+const staticServer = './public-react';
+server.use(express.static(staticServer));
+
+// servidor de estaticos
+const staticServer1 = './public-movies-images';
+server.use(express.static(staticServer1));
+
+// servidor de estaticos
+const staticServer2 = './public-movies-images';
+server.use(express.static(staticServer2));
