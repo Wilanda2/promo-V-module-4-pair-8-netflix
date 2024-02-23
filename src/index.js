@@ -20,7 +20,7 @@ async function getConnection() {
   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'mibo1992',
     database: 'netflix',
   });
 
@@ -38,11 +38,11 @@ server.get('/movies', async (req, res) => {
 
   let listMovies = [];
   if (genre === '') {
-    const selectMovie = `select * from movies order by title ${sort}`;
+    const selectMovie = `select * from movies order by titleMovie ${sort}`;
     const [resultMovies] = await conex.query(selectMovie);
     listMovies = resultMovies;
   } else {
-    const selectMovie = `select * from movies where genre = ? order by title ${sort}`;
+    const selectMovie = `select * from movies where genreMovie = ? order by titleMovie ${sort}`;
     const [resultMovies] = await conex.query(selectMovie, [genre]);
     listMovies = resultMovies;
   }
@@ -54,14 +54,14 @@ server.get('/movies', async (req, res) => {
 });
 
 
-// servidor de estaticos
-const staticServer = './public-react';
-server.use(express.static(staticServer));
+// // servidor de estaticos
+// const staticServer = './public-react';
+// server.use(express.static(staticServer));
 
-// servidor de estaticos
-const staticServer1 = './public-movies-images';
-server.use(express.static(staticServer1));
+// // servidor de estaticos
+// const staticServer1 = './public-movies-images';
+// server.use(express.static(staticServer1));
 
-// servidor de estaticos
-const staticServer2 = './public-movies-images';
-server.use(express.static(staticServer2));
+// // servidor de estaticos
+// const staticServer2 = './public-movies-images';
+// server.use(express.static(staticServer2));
