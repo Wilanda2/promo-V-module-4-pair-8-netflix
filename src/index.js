@@ -6,6 +6,7 @@ const mysql = require('mysql2/promise');
 const server = express();
 server.use(cors());
 server.use(express.json());
+require('dotenv').config();
 
 // init express aplication
 const serverPort = 4000;
@@ -23,36 +24,35 @@ async function getConnection() {
     database: 'netflix',
   });
 
-  connection.connect();
+  await connection.connect();
   return connection;
 }
 
 
 //endpoint para todas las peliculas
+
 server.get('/movies', async (req, res) => {
-  //require para cuando envien datos
-  //response para enviar desde el server datos al front
+  const { genre, sort } = req.query;
+  console.log(req.query);
+  const conex = await getConnection();
 
-  //Obtener los datos de la bases de datos
-  // 1. Obtener la conexion
-  const conn = await getConnection();
-
-  //. 2. Consulta que quiero a la bd: obtener todas las movies
-  const queryMovies = 'SELECT * FROM movies';
-
-  //3. Ejecutar la consulta
-  const [results, fields] = await conn.query(queryMovies);
-
-  console.log(fields);
-  console.log(results);
-
-  //4. Cerra la conexión
-  conn.end();
+  let listMovies = [];
+  if (genre === '') {
+    const selectMovie = `select * from movies order by title ${sort}`;
+    const [resultMovies] = await conex.query(selectMovie);
+    listMovies = resultMovies;
+  } else {
+    const selectMovie = `select * from movies where genre = ? order by title ${sort}`;
+    const [resultMovies] = await conex.query(selectMovie, [genre]);
+    listMovies = resultMovies;
+  }
+  conex.end();
   res.json({
     success: true,
-    movies: results
+    movies: listMovies,
   });
 });
+
 
 // servidor de estaticos
 const staticServer = './public-react';
