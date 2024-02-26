@@ -54,14 +54,14 @@ server.get('/movies', async (req, res) => {
 });
 
 
-// // servidor de estaticos
-// const staticServer = './public-react';
-// server.use(express.static(staticServer));
+// servidor de estaticos
+const staticServer = 'src/public-react';
+server.use(express.static(staticServer));
+
+// servidor de estaticos
+const staticServer1 = 'src/public.movies-images';
+server.use(express.static(staticServer1));
 
 // // servidor de estaticos
-// const staticServer1 = './public-movies-images';
-// server.use(express.static(staticServer1));
-
-// // servidor de estaticos
-// const staticServer2 = './public-movies-images';
+// const staticServer2 = 'src/public-movies-images';
 // server.use(express.static(staticServer2));
