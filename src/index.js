@@ -7,6 +7,7 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 require('dotenv').config();
+server.set('view engine', 'ejs');
 
 // init express aplication
 const serverPort = 4000;
@@ -20,7 +21,7 @@ async function getConnection() {
   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'mibo1992',
+    password: 'root',
     database: 'netflix',
   });
 
@@ -56,11 +57,18 @@ server.get('/movies', async (req, res) => {
 
 //ENPOINT PARA MOTOR DE PLANTILLAS
 
-server.get('/movies/:movieId', (req, res) => {
+server.get('/movies/:IdMovie', async (req, res) => {
 
-  const movieId = req.params.id;
+  const conex = await getConnection();
 
-  console.log(movieId)
+  const movieById = req.params.IdMovie;
+
+  const foundMovie = "SELECT * FROM movies WHERE IdMovie = 1";
+
+  const [resultMovie] = await conex.query(foundMovie);
+    console.log(resultMovie, "esto es");
+    res.render('movie', { foundMovie: resultMovie });
+
 });
 
 
