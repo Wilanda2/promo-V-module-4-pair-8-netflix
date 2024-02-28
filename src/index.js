@@ -87,6 +87,6 @@ const staticServer1 = 'src/public.movies-images';
 server.use(express.static(staticServer1));
 
 // servidor de estaticos para el estilo
-const staticServerStyle = 'src/public-css/main.css';
+const staticServerStyle = 'src/public-css';
 server.use(express.static(staticServerStyle));
 
