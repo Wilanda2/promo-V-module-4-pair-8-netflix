@@ -21,7 +21,7 @@ async function getConnection() {
   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'mibo1992',
     database: 'netflix',
   });
 
@@ -61,13 +61,17 @@ server.get('/movies/:IdMovie', async (req, res) => {
 
   const conex = await getConnection();
 
+  console.log("ajjajajaja", req.params.IdMovie)
+
   const movieById = req.params.IdMovie;
 
   const foundMovie = "SELECT * FROM movies WHERE IdMovie = 1";
 
-  const [resultMovie] = await conex.query(foundMovie);
-    console.log(resultMovie, "esto es");
-    res.render('movie', { foundMovie: resultMovie });
+  const [resultMovie] = await conex.query(foundMovie, [movieById]);
+
+
+  console.log(resultMovie, "esto es");
+  res.render('movie', resultMovie[0]);
 
 });
 
@@ -81,4 +85,8 @@ server.use(express.static(staticServer));
 // servidor de estaticos
 const staticServer1 = 'src/public.movies-images';
 server.use(express.static(staticServer1));
+
+// servidor de estaticos para el estilo
+const staticServerStyle = 'src/public-css/main.css';
+server.use(express.static(staticServerStyle));
 
