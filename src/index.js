@@ -65,13 +65,36 @@ server.get('/movies/:IdMovie', async (req, res) => {
 
   const movieById = req.params.IdMovie;
 
-  const foundMovie = "SELECT * FROM movies WHERE IdMovie = 1";
+  const foundMovie = "SELECT * FROM movies WHERE IdMovie = ?";
 
   const [resultMovie] = await conex.query(foundMovie, [movieById]);
 
 
   console.log(resultMovie, "esto es");
   res.render('movie', resultMovie[0]);
+
+});
+
+//ENDPOINT para recibir email y contraseña de la usuaria
+
+server.post("/signup", async (req, res) => {
+
+  const data = req.body;
+  const { id, email, password } = data;
+
+  const conex = await getConnection();
+
+  const sql = "insert into users (idUser, email, passwordUser) values (?,?,?)" //nombres exactos de las columnas de la BS
+
+  const [result] = await conex.query(sql, [id, email, password]);
+
+  console.log("este es el objeto de resultados", result)
+
+  res.json({
+    success: true,
+    id: result.insertId // id que generó MySQL para la nueva fila--INSERTID aparece en la consola de la terminal que es del objeto que devuelve results
+
+  });
 
 });
 
